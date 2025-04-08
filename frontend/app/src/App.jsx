@@ -35,9 +35,6 @@ function App() {
                         <li>
                             <Link to="/">Lista de Tarefas</Link>
                         </li>
-                        <li>
-                            <Link to="/cadastro">Cadastrar Tarefa</Link>
-                        </li>
                     </ul>
                 </Navigation>
                 <Routes>
