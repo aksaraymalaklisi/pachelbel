@@ -58,3 +58,5 @@ sdist/
 *.egg-info/
 
 # Miscelânea
+
+uvicorntest.pytemp

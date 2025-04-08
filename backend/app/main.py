@@ -2,8 +2,8 @@ from typing import List
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
-from app import models, schemas
-from app.database import get_db, engine
+from . import models, schemas
+from .database import get_db, engine, SessionLocal
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -13,8 +13,8 @@ app = FastAPI()
 
 origins = [
     "http://localhost:3000",  # A origem do seu frontend React (porta padrão)
-    "http://localhost:8080",  # Outras origens que você pode querer permitir
-    "*",                      # Permite todas as origens (apenas para desenvolvimento)
+    "http://localhost:5173",  # Outras origens que você pode querer permitir
+    # "*",                      # Permite todas as origens (apenas para desenvolvimento)
 ]
 
 app.add_middleware(
@@ -37,6 +37,10 @@ class Tarefa(schemas.Tarefa):
     pass
 
 # --- Rotas ---
+
+@app.get("/health/")
+def health_check():
+    return {"status": "ok"}
 
 @app.post("/tarefas/", response_model=Tarefa)
 def criar_tarefa(tarefa: TarefaCreate, db: Session = Depends(get_db)):
@@ -78,3 +82,6 @@ def deletar_tarefa(tarefa_id: int, db: Session = Depends(get_db)):
     db.delete(db_tarefa)
     db.commit()
     return db_tarefa
+
+# --- Testes ---
+
