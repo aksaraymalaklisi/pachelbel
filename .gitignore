@@ -1,3 +1,4 @@
+# Valeu, Gemini.
 # Logs
 logs
 *.log
@@ -6,7 +7,6 @@ logs
 # Environment variables
 .env
 .env.*
-!.env.example # Incluímos o .env.example para servir de modelo
 
 # Frontend (React/Vite)
 node_modules/
