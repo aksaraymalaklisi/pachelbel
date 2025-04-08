@@ -1,0 +1,60 @@
+# Logs
+logs
+*.log
+*.out
+
+# Environment variables
+.env
+.env.*
+!.env.example # Incluímos o .env.example para servir de modelo
+
+# Frontend (React/Vite)
+node_modules/
+dist/
+build/
+.cache
+.yarn
+yarn-error.log
+
+# Backend (FastAPI/Python)
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Packages
+*.egg
+*.whl
+.venv/
+env/
+venv/
+pip-log.txt
+pip-delete-this.txt
+
+# IDEs and Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*.sashimi
+*.DS_Store
+Thumbs.db
+
+# Outros arquivos temporários do sistema
+tmp/
+temp/
+
+# Arquivos de histórico do Python
+.python-version
+
+# Arquivos de coverage (se você usar testes de cobertura)
+.coverage
+coverage.xml
+htmlcov/
+
+# Arquivos de distribuição (se você for empacotar sua aplicação)
+build/
+dist/
+sdist/
+*.egg-info/
+
+# Miscelânea
