@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { listarTarefas, deletarTarefa } from '../services/api';
-import { Link } from 'react-router';
+import { listarTarefas, deletarTarefa, atualizarTarefa } from '../services/api';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const ListaContainer = styled.div`
@@ -12,6 +12,13 @@ const TituloPagina = styled.h2`
     margin-bottom: 20px;
 `;
 
+const LinkAdicionar = styled(Link)`
+    display: inline-block;
+    margin-bottom: 15px;
+    text-decoration: none;
+    color: #007bff;
+`;
+
 const Lista = styled.ul`
     list-style: none;
     padding: 0;
@@ -20,16 +27,49 @@ const Lista = styled.ul`
 const ItemLista = styled.li`
     border: 1px solid #ccc;
     margin-bottom: 10px;
-    padding: 10px;
+    padding: 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: ${props => props.concluida ? '#f0fff0' : 'white'}; /* Verde claro se concluída */
+`;
+
+const InfoTarefa = styled.div`
+    flex-grow: 1;
+`;
+
+const TituloTarefa = styled.strong`
+    display: block;
+    margin-bottom: 5px;
+`;
+
+const DescricaoTarefa = styled.p`
+    margin-bottom: 5px;
+    color: #555;
+`;
+
+const CheckboxConcluida = styled.input`
+    margin-right: 10px;
+    cursor: pointer;
+`;
+
+const LabelConcluida = styled.label`
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
 `;
 
 const Acoes = styled.div`
     button {
         margin-left: 10px;
         cursor: pointer;
+        padding: 8px 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: white;
+        &:hover {
+            background-color: #eee;
+        }
     }
 `;
 
@@ -53,25 +93,41 @@ function ListaTarefas() {
         if (window.confirm("Tem certeza que deseja deletar esta tarefa?")) {
             try {
                 await deletarTarefa(id);
-                carregarTarefas(); // Recarrega a lista após a exclusão
+                carregarTarefas();
             } catch (error) {
                 console.error("Erro ao deletar tarefa:", error);
             }
         }
     };
 
+    const handleConcluidaChange = async (id, concluida) => {
+        try {
+            await atualizarTarefa(id, { concluida: !concluida });
+            carregarTarefas();
+        } catch (error) {
+            console.error("Erro ao atualizar status da tarefa:", error);
+        }
+    };
+
     return (
         <ListaContainer>
             <TituloPagina>Lista de Tarefas</TituloPagina>
-            <Link to="/cadastro">Adicionar Nova Tarefa</Link>
+            <LinkAdicionar to="/cadastro">Adicionar Nova Tarefa</LinkAdicionar>
             <Lista>
                 {tarefas.map(tarefa => (
-                    <ItemLista key={tarefa.id}>
-                        <div>
-                            <strong>{tarefa.titulo}</strong>
-                            {tarefa.descricao && <p>{tarefa.descricao}</p>}
-                            <small>Concluída: {tarefa.concluida ? 'Sim' : 'Não'}</small>
-                        </div>
+                    <ItemLista key={tarefa.id} concluida={tarefa.concluida}>
+                        <InfoTarefa>
+                            <TituloTarefa>{tarefa.titulo}</TituloTarefa>
+                            {tarefa.descricao && <DescricaoTarefa>{tarefa.descricao}</DescricaoTarefa>}
+                            <LabelConcluida>
+                                <CheckboxConcluida
+                                    type="checkbox"
+                                    checked={tarefa.concluida}
+                                    onChange={() => handleConcluidaChange(tarefa.id, tarefa.concluida)}
+                                />
+                                Concluída
+                            </LabelConcluida>
+                        </InfoTarefa>
                         <Acoes>
                             <Link to={`/editar/${tarefa.id}`}>Editar</Link>
                             <button onClick={() => handleDelete(tarefa.id)}>Deletar</button>

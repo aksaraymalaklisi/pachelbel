@@ -1,10 +1,9 @@
-from typing import Optional
 from pydantic import BaseModel
 
 class TarefaBase(BaseModel):
     titulo: str
-    descricao: Optional[str] = None
-    concluida: bool = False
+    descricao: str | None = None
+    concluida: bool = False  # Certifique-se de que é bool aqui
 
 class TarefaCreate(TarefaBase):
     pass
