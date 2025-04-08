@@ -26,3 +26,23 @@
 ## Front-end (React com Vite)
 
 Não há muito o que dizer. Vite, Axios, React Router e Styled Components foram utilizados.
+
+## Adicionais
+
+### Iniciar Uvicorn
+É necessário estar na pasta backend.
+`uvicorn app.main:app --reload`
+
+### Iniciar Vite 
+É necessário estar na pasta app
+`npm install`
+`npm run dev`
+
+### Arquivo .env
+É necessário preencher as seguintes entradas:
+```
+DB_USER=fastapi_user
+DB_PASS=senha_do_usuario
+DB_HOST=localhost
+DB_PORT=3306
+DB_NAME=sistema_db
