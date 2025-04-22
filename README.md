@@ -34,7 +34,7 @@ Não há muito o que dizer. Vite, Axios, React Router e Styled Components foram 
 `uvicorn app.main:app --reload`
 
 ### Iniciar Vite 
-É necessário estar na pasta app
+É necessário estar na pasta app.
 `npm install`
 `npm run dev`
 
