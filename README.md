@@ -31,12 +31,16 @@ Não há muito o que dizer. Vite, Axios, React Router e Styled Components foram 
 
 ### Iniciar Uvicorn
 - É necessário estar na pasta backend.
-`uvicorn app.main:app --reload`
+```
+uvicorn app.main:app --reload
+```
 
-### Iniciar Vite 
+### Instalar e iniciar Vite 
 - É necessário estar na pasta app.
-`npm install`
-`npm run dev`
+```
+npm install
+npm run dev
+```
 
 ### Arquivo .env
 É necessário preencher as seguintes entradas:
