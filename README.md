@@ -20,7 +20,7 @@
 - **CORS (`main.py`):**
     * Foi configurado o middleware CORS para permitir requisições do front-end React (rodando em `http://localhost:3000` e `http://localhost:5173`).
 
-- **Script SQL (`schema.sql`):**
+- **Script SQL:**
     * Há um script SQL para criar o banco de dados `sistema_db` e a tabela `tarefas`.
 
 ## Front-end (React com Vite)
